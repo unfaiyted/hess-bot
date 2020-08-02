@@ -37,10 +37,6 @@ export const MOVIES = {
                 return   "\n" +  counting(type, i) + ". " + title
             });
 
-
-            console.log(client)
-
-
             const embed = new MessageEmbed()
                 .setColor('#005f20')
                 .setTitle('Movies List')
@@ -61,20 +57,51 @@ export const MOVIES = {
     },
     deleteMovies: {
         triggers: [
-            /delete movie|del mov|delete that movie|/
+            /delete movie|del mov|delete that movie/
         ],
         help: "Command will remove a movie from our list",
         func: (msg) => {
+
+
+            const result = msg.content.replace(MOVIES.deleteMovies.triggers[0],"");
+            console.log(result);
+
+            db.get('movies')
+               .remove({ title: result.trim() })
+               .write();
+
+
+            msg.reply("Deleted that shizzzzz, I mean probably.")
 
         }
     },
     setWatched: {
         triggers: [
-            /watched movie|we watched|movie watched/
+            /watched movie|we watched|movie watched|we have watched|was watched/,
+            /we didnt watch|was not watched|we havent watched|we haven't watched|we have not watched/
         ],
         help: "Command will mark a movie as watched",
         func: (msg) => {
 
+
+            const watched = MOVIES.setWatched.triggers[0];
+            const unWatched = MOVIES.setWatched.triggers[1];
+            let isWatched = false;
+
+            if(watched.test(msg.content.toLowerCase())) isWatched = true;
+
+            const result = msg.content.replace((isWatched) ? watched : unWatched,"").trim();
+            console.log(result);
+
+            db.get('movies')
+              .find({ title: result.trim() })
+              .assign({ watched: isWatched})
+              .write();
+
+            msg.reply(`${isWatched ? "Awwwwwwww yissssssssss!! we" : "Na, we haven't" } watched ${result}`)
+
         }
     }
+
+
 };

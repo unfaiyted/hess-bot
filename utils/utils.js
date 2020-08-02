@@ -1,22 +1,19 @@
 import fetch from "node-fetch"
-import {MEMES_SUBS} from "./constants/app.constants.js";
+import {MEMES_SUBS, VALID_IMG_EXT} from "./constants/app.constants.js";
 
 export const randomItemFromArray = (array) => {
     console.log(array);
  return array[Math.floor(Math.random()*(array.length))]
-}
-
+};
 
 
 export const isURLImage = (url) => {
-
-    const validExtensions = ["png","gif","jpg","jpeg"];
 
     const urlSplit = url.split("/");
     const fileName = urlSplit[urlSplit.length-1];
     const extension = fileName.split(".");
 
-    return validExtensions.some(ext => ext === extension[1]);
+    return VALID_IMG_EXT.some(ext => ext === extension[1]);
 };
 
 

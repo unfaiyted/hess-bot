@@ -17,10 +17,18 @@ export const RANDOM = {
         ]
     },
 
+    birthday: {
+        regexMatch: /birthday|chris birth|hess birthday/,
+        responses: [
+            "My birthday MONTH is August!",
+            "August 8th! Best Day EVaHHH"
+        ]
+    },
+
     watson: {
         regexMatch: /cody|watson|coty|couty|twatson/,
         responses: [
-            "Oh man not that waterhead",
+            "oh man not that waterhead",
             "..."
         ]
     },
@@ -29,11 +37,11 @@ export const RANDOM = {
         regexMatch: /watermelon|Watermeon/,
         responses: [
             "Ewwww!",
-            "Dude, I fucking love watermelon",
-            "Watermelon is so gross.",
+            "dude, I fucking love watermelon",
+            "watermelon is so gross.",
             "fuck watermelon",
-            "Watermelon is the best",
-            "Watermelons are for Hookers and Fat People"
+            "watermelon is the best",
+            "watermelons are for hookers and fat people"
         ]
     },
 
@@ -47,16 +55,16 @@ export const RANDOM = {
     games: {
         regexMatch: /games|game/,
         responses: [
-            "Wanna play the 5 dollar game?",
-            "The 5 dollar game is my favorite one",
-            "Games are for Hookers and Fat People",
+            "wanna play the 5 dollar game?",
+            "the 5 dollar game is my favorite one",
+            "games are for hookers and fat people",
         ]
     },
 
     rickAndMorty: {
         regexMatch: /rick and morty|morty|rick|rick & morty|pickle rick/,
         responses: [
-            "Slut Dragon!!",
+            "slut dragon!!",
             "./images/alyssa-rick.jpg"
         ]
     },
@@ -65,7 +73,7 @@ export const RANDOM = {
         regexMatch: /drugs|cocaine/,
         responses: [
             "Cocaine!",
-            "Drugs are for Hookers and Fat People"
+            "Drugs are for hookers and fat people"
         ]
     },
 
@@ -81,7 +89,7 @@ export const RANDOM = {
         responses: [
          "I am eSsEnTiAl",
          "I decided I don't want to work tonight.",
-         "Work is for Hookers and Fat People"
+         "work is for hookers and fat people"
         ]
     },
 
@@ -89,7 +97,7 @@ export const RANDOM = {
         regexMatch: /phone|charging/,
         responses: [
             "I charge my phone once a month whether it needs it or not.",
-            "Phones are for Hookers and Fat People"
+            "Phones are for hookers and fat people"
         ]
     },
 
@@ -99,7 +107,7 @@ export const RANDOM = {
             "Hard and Throbbing Facts you mean.",
             "These are erect facts.",
             "Fun fact, that's also how you prevent catching the gay",
-            "Facts are for Hookers and Fat People"
+            "Facts are for hookers and fat people"
         ]
     },
 
@@ -107,7 +115,7 @@ export const RANDOM = {
         regexMatch: /corona|the rona|virus/,
         responses: [
             "Don't catch the rona",
-            "The Rona is for Hookers and Fat People"
+            "The Rona is for hookers and fat people"
         ]
     },
 
@@ -115,7 +123,7 @@ export const RANDOM = {
         regexMatch: /sucking dick|sex/,
         responses: [
             "Mama said don't do something you're good at for free",
-            "Sex is for Hookers and Fat People"
+            "sex is for hookers and fat people"
         ]
     },
 
@@ -133,10 +141,11 @@ export const RANDOM = {
     //The hessBot only pedals Honey Select and the original PC version of Manhunt 2
 
     music: {
-        regexMatch: /music|muzak|jazz|custom EX|horn|Desenclos/,
+        regexMatch: /music|muzak|jazz|custom EX|horn|Desenclos|sax/,
         responses: [
-            "Sir, a custom EX is a classical horn",
+            "a custom EX is a classical horn",
             "I'll know in 90 minutes roughly if I am ready to horn out",
+            "https://media.giphy.com/media/BupozjHRL7dLi/source.gif",
             [
                 "Desenclos is still not my friend hahaha",
                 "Why does he make so much hurty sax?"

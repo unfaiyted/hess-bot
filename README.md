@@ -14,3 +14,7 @@ What can i do?
 - Post random cat picture of Dane/Alyssa's cats
 
 
+Setup using:
+node.js - v.14.7.0
+
+

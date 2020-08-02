@@ -2,6 +2,7 @@ import fetch from "node-fetch"
 import {MEMES_SUBS} from "./constants/app.constants.js";
 
 export const randomItemFromArray = (array) => {
+    console.log(array);
  return array[Math.floor(Math.random()*(array.length))]
 }
 

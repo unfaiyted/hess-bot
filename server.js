@@ -1,11 +1,26 @@
+import Discord, {MessageAttachment} from "discord.js";
+import low from  'lowdb';
+import FileSync from 'lowdb/adapters/FileSync.js';
+
 import {TOKEN} from "./utils/constants/secret.js";
-import Discord from "discord.js";
 import {COMMANDS, failChance} from "./utils/commands.js";
 import {RANDOM} from "./utils/responses/random.js";
-import {randomItemFromArray} from "./utils/utils.js";
+import {randomItemFromArray, isURLImage} from "./utils/utils.js";
 import {CONFIRM} from "./utils/responses/generic.js";
 
-const client = new Discord.Client();
+
+const adapter = new FileSync('db.json');
+global.db = low(adapter);
+
+
+db.defaults({
+    movies: [],
+    events: []
+})
+    .write();
+
+
+global.client = new Discord.Client();
 const commandKeys = Object.keys(COMMANDS);
 const randomKeys = Object.keys(RANDOM);
 
@@ -40,18 +55,28 @@ client.on('message', msg => {
     }
 
     for (const key of commandKeys) {
-        if (COMMANDS[key].triggers.some(str => str.test(msg.content))) {
+        if (COMMANDS[key].triggers.some(str => str.test(msg.content.toLowerCase()))) {
             failChance(msg, COMMANDS[key].func)
         }
     }
 
     for (const key of randomKeys) {
-        if (RANDOM[key].regexMatch.test(msg.content)) {
-            msg.reply(randomItemFromArray(RANDOM[key].responses))
+        if (RANDOM[key].regexMatch.test(msg.content.toLowerCase())) {
+
+            const response = randomItemFromArray(RANDOM[key].responses);
+
+            if(isURLImage(response)) {
+                const attachment = new MessageAttachment(response);
+                // Send the attachment in the message channel with a content
+                msg.channel.send(``, attachment);
+            } else {
+                msg.reply(response);
+            }
+
+
+
         }
     }
-
-
 
 });
 

@@ -9,7 +9,6 @@ export const RANDOM = {
         ]
     },
 
-
     dane: {
         regexMatch: /dane|faiyt/,
         responses: [
@@ -22,18 +21,26 @@ export const RANDOM = {
         regexMatch: /cody|watson|coty|couty|twatson/,
         responses: [
             "Oh man not that waterhead",
-            ""
+            "..."
         ]
-    }
+    },
 
     watermelon: {
-        regexMatch: /watermelon/,
+        regexMatch: /watermelon|Watermeon/,
         responses: [
             "Ewwww!",
             "Dude, I fucking love watermelon",
             "Watermelon is so gross.",
             "fuck watermelon",
-            "Watermelon is the best"
+            "Watermelon is the best",
+            "Watermelons are for Hookers and Fat People"
+        ]
+    },
+
+    moist: {
+        regexMatch: /moist/,
+        responses: [
+            "M O I S S S T",
         ]
     },
 
@@ -42,51 +49,88 @@ export const RANDOM = {
         responses: [
             "Wanna play the 5 dollar game?",
             "The 5 dollar game is my favorite one",
-
+            "Games are for Hookers and Fat People",
         ]
     },
 
     rickAndMorty: {
-        regexMatch: /rick and morty|morty|rick|rick & morty/,
+        regexMatch: /rick and morty|morty|rick|rick & morty|pickle rick/,
         responses: [
             "Slut Dragon!!",
+            "./images/alyssa-rick.jpg"
         ]
     },
 
     drugs: {
         regexMatch: /drugs|cocaine/,
         responses: [
-            "Cocaine!"
+            "Cocaine!",
+            "Drugs are for Hookers and Fat People"
         ]
     },
 
     girls: {
         regexMatch: /girls|women/,
         responses: [
-            "Watch out for the girls with Danger Hair!"
+           "Watch out for the girls with those danger hair colors!"
+        ]
+    },
+
+    work: {
+        regexMatch: /working|work/,
+        responses: [
+         "I am eSsEnTiAl",
+         "I decided I don't want to work tonight.",
+         "Work is for Hookers and Fat People"
+        ]
+    },
+
+    phone: {
+        regexMatch: /phone|charging/,
+        responses: [
+            "I charge my phone once a month whether it needs it or not.",
+            "Phones are for Hookers and Fat People"
+        ]
+    },
+
+    facts: {
+        regexMatch: /facts/,
+        responses: [
+            "Hard and Throbbing Facts you mean.",
+            "These are erect facts.",
+            "Fun fact, that's also how you prevent catching the gay",
+            "Facts are for Hookers and Fat People"
+        ]
+    },
+
+    corona: {
+        regexMatch: /corona|the rona|virus/,
+        responses: [
+            "Don't catch the rona",
+            "The Rona is for Hookers and Fat People"
+        ]
+    },
+
+    sex: {
+        regexMatch: /sucking dick|sex/,
+        responses: [
+            "Mama said don't do something you're good at for free",
+            "Sex is for Hookers and Fat People"
+        ]
+    },
+
+    antivax: {
+        regexMatch: /antivax|antaivaxx|antivaxer/,
+        responses:[
+            "Alyssa's sisters is at it again.",
+            "Vaccines cause Watson."
         ]
     },
 
 
-
-    // Hookers and Fat People, I'm a bot.
-    //Awwwwwwww yissssssssss
-    //Yussssssssss
-    // So good!
-    //   Awwww shiiiiiid
-    // I need to get sleep
-    // The rona
-    // 5 dollar game
-    // Danger Hair
-    // random fail change, ignored you
-    // I decided I don't want to work tonight.
-    // So I am gonna work tomorrow lol I am not scheduled until Thursday but one extra day will help
-    // Slut Dragon
     //Lol are you drunk? -> check message if words arent in dictionary?
-    // Ewwww!
-    // Sleeping wayyyyyyy too much mostly
     // I feel like I'm gonna get Z U C C D
-    // Cocaine!
+    //The hessBot only pedals Honey Select and the original PC version of Manhunt 2
 
     music: {
         regexMatch: /music|muzak|jazz|custom EX|horn|Desenclos/,
@@ -101,8 +145,3 @@ export const RANDOM = {
     }
 
 };
-
-
-// From faiyt
-// Dnooooooooo
-// Dnooooooooooooooooooooooooooooooo

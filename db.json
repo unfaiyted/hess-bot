@@ -1,0 +1,37 @@
+{
+  "movies": [
+    {
+      "title": "A Serbian Film",
+      "watched": true
+    },
+    {
+      "title": "Eraserhead",
+      "watched": false
+    },
+    {
+      "title": "Solaris",
+      "watched": false
+    },
+    {
+      "title": "Society",
+      "watched": false
+    },
+    {
+      "title": "Eraserhead",
+      "watched": false
+    },
+    {
+      "title": "Palm Springs",
+      "watched": false
+    },
+    {
+      "title": "Happy Death Day",
+      "watched": false
+    },
+    {
+      "title": "Cabin in the Woods",
+      "watched": false
+    }
+  ],
+  "events": []
+}

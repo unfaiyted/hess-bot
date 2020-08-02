@@ -1,21 +1,15 @@
+import {MessageAttachment} from "discord.js";
 
 // List of commands in the bot.
 import {randomFailChance} from "./numbers.js";
 import {randomItemFromArray, getPictureFromReddit} from "./utils.js";
-import {RANDOM} from "./responses/random.js";
 import {CONFIRM, DENY} from "./responses/generic.js";
+import {MOVIES} from "./responses/movies.js";
+
 
 export const COMMANDS = {
-  addMovie: {
-      triggers: [
-          /add movie/
-      ],
-      help: "",
-      func: (msg) => {
-          console.log("-______________________- why must you hurt me");
-          msg.reply('add mov');
-      }
-  },
+    ...MOVIES,
+
   puns: {
       triggers: [
           /pun/,
@@ -33,8 +27,6 @@ export const COMMANDS = {
 
           msg.reply(randomItemFromArray(CONFIRM));
 
-
-
           try {
               const picture =  await getPictureFromReddit();
 
@@ -47,17 +39,29 @@ export const COMMANDS = {
               }
 
           } catch (e) {
-              msg.reply("Fuck if I know.")
+              msg.reply("Fuck if I know. Shit failed")
           }
 
-
-
       }
-  }
+  },
+
+    sad: {
+        triggers: [
+            /sad|unhappy|worthless|life sucks/
+        ],
+        func: async (msg) => {
+
+            const attachment = new MessageAttachment('./images/happy.jpg');
+            // Send the attachment in the message channel with a content
+            msg.channel.send(``, attachment);
+            msg.reply("HAPPY AND FULFILLED")
+        }
+    }
 };
 
 
 export const failChance = (msg, func) => {
+
     if (randomFailChance(.25)) {
         console.log("has random fail",);
         msg.reply(randomItemFromArray(DENY))

@@ -2,14 +2,16 @@ import {MessageAttachment} from "discord.js";
 
 // List of commands in the bot.
 import {randomFailChance} from "./numbers.js";
-import {randomItemFromArray, getPictureFromReddit} from "./utils.js";
+import {randomItemFromArray} from "./utils.js";
 import {CONFIRM, DENY} from "./responses/generic.js";
 import {MOVIES} from "./responses/movies.js";
 import {_FACE_} from "./constants/app.constants.js";
+import {MEMES} from "./responses/memes.js";
 
 
 export const COMMANDS = {
     ...MOVIES,
+    ...MEMES,
   puns: {
       triggers: [
           /pun/,
@@ -18,15 +20,6 @@ export const COMMANDS = {
           let emoji =  msg.guild.emojis.cache.find(emoji => emoji.name === 'hessPuns');
           msg.react(emoji);
           msg.reply(`${_FACE_} why must you hurt me`);
-      }
-  },
-  memes: {
-      triggers: [
-          /meme/
-      ],
-      func: async (msg) => {
-          msg.reply(randomItemFromArray(CONFIRM));
-          getMemes(msg);
       }
   },
   sad: {
@@ -45,36 +38,6 @@ export const COMMANDS = {
 
 
 /**
- * Trys to find a meme, if it fails it will retry 5 times before failing finally.
- * @param msg
- * @param retry
- * @returns {Promise<void>}
- */
-export async function getMemes(msg, retry = 0)  {
-
-    try {
-        const picture =  await getPictureFromReddit();
-
-        console.log(picture);
-
-        if(picture.length > 0) {
-            msg.reply(randomItemFromArray(picture).link);
-        } else {
-            msg.reply("Memes suck today. Try again.")
-        }
-
-    } catch (e) {
-        if(retry < 5) {
-            getMemes(msg,retry+1);
-        } else {
-            msg.reply("Fuck if I know, shits broke.");
-        }
-    }
-
-};
-
-
-/**
  * Change a msg will just outright fail,
  * hessBot just doesnt like doing stuff, hes kinda lazy sometimes
  * @param msg
@@ -83,10 +46,8 @@ export async function getMemes(msg, retry = 0)  {
 export const failChance = (msg, func) => {
 
     if (randomFailChance(.25)) {
-        console.log("has random fail",);
         msg.reply(randomItemFromArray(DENY))
     } else {
-        console.log(func, typeof func);
         func(msg);
     }
-}
+};

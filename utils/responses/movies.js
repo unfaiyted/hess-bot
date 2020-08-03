@@ -47,17 +47,13 @@ export const MOVIES = {
                 .setTimestamp()
                 .setFooter('HessBot the best Bot',  client.user.displayAvatarURL());
 
-
-            console.log(mov);
-
             msg.channel.send(embed);
-
 
         }
     },
     deleteMovies: {
         triggers: [
-            /delete movie|del mov|delete that movie/
+            /delete movie|del mov|delete that movie|delete the movie/
         ],
         help: "Command will remove a movie from our list",
         func: (msg) => {
@@ -75,7 +71,7 @@ export const MOVIES = {
 
         }
     },
-    setWatched: {
+    toggleWatched: {
         triggers: [
             /watched movie|we watched|movie watched|we have watched|was watched/,
             /we didnt watch|was not watched|we havent watched|we haven't watched|we have not watched/
@@ -83,15 +79,13 @@ export const MOVIES = {
         help: "Command will mark a movie as watched",
         func: (msg) => {
 
-
-            const watched = MOVIES.setWatched.triggers[0];
-            const unWatched = MOVIES.setWatched.triggers[1];
+            const watched = MOVIES.toggleWatched.triggers[0];
+            const unWatched = MOVIES.toggleWatched.triggers[1];
             let isWatched = false;
 
             if(watched.test(msg.content.toLowerCase())) isWatched = true;
 
             const result = msg.content.replace((isWatched) ? watched : unWatched,"").trim();
-            console.log(result);
 
             db.get('movies')
               .find({ title: result.trim() })

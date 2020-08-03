@@ -12,13 +12,12 @@ import {CONFIRM} from "./utils/responses/generic.js";
 const adapter = new FileSync('db.json');
 global.db = low(adapter);
 
-
 db.defaults({
     movies: [],
-    events: []
-})
-    .write();
-
+    events: [],
+    polls: [],
+    previousMemes: []
+}).write();
 
 global.client = new Discord.Client();
 const commandKeys = Object.keys(COMMANDS);
@@ -26,6 +25,12 @@ const randomKeys = Object.keys(RANDOM);
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+
+
+
+   const prev =  db.get('previousMemes').find({ link: "https://i.redd.it/ftrto3vvjvle51.jpg" }).value();
+
+   console.log(prev);
 
     // console all commands
     for (const key of commandKeys) {
@@ -47,7 +52,6 @@ client.on('guildMemberAdd', member => {
 
 
 client.on('message', msg => {
-
     if (msg.author.bot) return;
 
     if (msg.content === 'ping') {
@@ -65,21 +69,29 @@ client.on('message', msg => {
 
             const response = randomItemFromArray(RANDOM[key].responses);
 
-            if(isURLImage(response)) {
-                const attachment = new MessageAttachment(response);
-                // Send the attachment in the message channel with a content
-                msg.channel.send(``, attachment);
+            if (Array.isArray(response)) {
+                for(const res of response) {
+                    createMessage(res, msg);
+                }
             } else {
-                msg.reply(response);
+                createMessage(response, msg)
             }
-
-
 
         }
     }
 
 });
 
+
+function createMessage(response, msg) {
+    if(isURLImage(response)) {
+        const attachment = new MessageAttachment(response);
+        // Send the attachment in the message channel with a content
+        msg.channel.send(``, attachment);
+    } else {
+        msg.reply(response);
+    }
+}
 
 
 client.login(TOKEN);

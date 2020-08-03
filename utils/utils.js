@@ -2,10 +2,8 @@ import fetch from "node-fetch"
 import {MEMES_SUBS, VALID_IMG_EXT} from "./constants/app.constants.js";
 
 export const randomItemFromArray = (array) => {
-    console.log(array);
  return array[Math.floor(Math.random()*(array.length))]
 };
-
 
 export const isURLImage = (url) => {
 
@@ -18,18 +16,17 @@ export const isURLImage = (url) => {
 
 
 export  const getPictureFromReddit = (subReddit, index = 0) => {
-
-   //https://www.reddit.com/r/NoahGetTheBoat.json
-
     const sub =  randomItemFromArray(MEMES_SUBS);
-
-       return fetch('https://www.reddit.com/r/' + sub + '.json')
+    return fetch('https://www.reddit.com/r/' + sub + '.json')
             .then(res => res.json())
             .then(res => res.data.children)
             .then(res => res.filter(post => isURLImage(post.data.url))
                 .map(post => ({
-                author: post.data.author_fullname,
-                link: post.data.url
+                    author: post.data.author,
+                    link: post.data.url,
+                    sub: post.data.subreddit_name_prefixed,
+                    redditLink: post.data.permalink,
+                    title: post.data.title,
             })))
 };
 

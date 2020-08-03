@@ -135,6 +135,16 @@ export const RANDOM = {
         ]
     },
 
+    wan: {
+        regexMatch: /van|chris car|joyride|joy ride|adventure|wan/,
+        responses:[
+            [
+             "Get in the W A N bitcheeees!",
+             "./images/WAN.jpg"
+            ],
+        ]
+    },
+
 
     //Lol are you drunk? -> check message if words arent in dictionary?
     // I feel like I'm gonna get Z U C C D

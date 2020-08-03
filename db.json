@@ -17,10 +17,6 @@
       "watched": false
     },
     {
-      "title": "Eraserhead",
-      "watched": false
-    },
-    {
       "title": "Palm Springs",
       "watched": false
     },
@@ -33,5 +29,82 @@
       "watched": false
     }
   ],
-  "events": []
+  "events": [],
+  "previousMemes": [
+    {
+      "author": "t2_5qq5wsu5",
+      "link": "https://i.redd.it/trto3vvjvle51.jpg"
+    },
+    {
+      "author": "spoopezy",
+      "link": "https://i.redd.it/vp9m5m620le51.jpg",
+      "sub": "r/HolUp",
+      "redditLink": "/r/HolUp/comments/i2b4ud/hol_up/",
+      "title": "hol up"
+    },
+    {
+      "author": "DrooneyDruggenstone",
+      "link": "https://i.redd.it/gpf6z04mnke51.jpg",
+      "sub": "r/suddenlysexoffender",
+      "redditLink": "/r/suddenlysexoffender/comments/i2acz3/just_imagine_receiving_this_message/",
+      "title": "just Imagine receiving this message"
+    },
+    {
+      "author": "Cancer_Smoothie",
+      "link": "https://i.redd.it/udhrcyboi6e51.png",
+      "sub": "r/suddenlysexoffender",
+      "redditLink": "/r/suddenlysexoffender/comments/i1aylm/double_whammy/",
+      "title": "Double whammy"
+    },
+    {
+      "author": "Xiao-Mein",
+      "link": "https://i.redd.it/zk4oo024fme51.jpg",
+      "sub": "r/TIHI",
+      "redditLink": "/r/TIHI/comments/i2fh6o/thanks_i_hate_6ft_men/",
+      "title": "Thanks I hate 6ft men"
+    },
+    {
+      "author": "supreme-lemur",
+      "link": "https://i.redd.it/m254wy96ele51.jpg",
+      "sub": "r/TIHI",
+      "redditLink": "/r/TIHI/comments/i2c5yd/thanks_i_hate_sausage_cartoons/",
+      "title": "Thanks I hate sausage cartoons"
+    },
+    {
+      "author": "geniuz_wrap",
+      "link": "https://i.redd.it/mv1jnck7rke51.jpg",
+      "sub": "r/SuddenlyGay",
+      "redditLink": "/r/SuddenlyGay/comments/i2djzx/welp/",
+      "title": "welp"
+    },
+    {
+      "author": "tylersprice",
+      "link": "https://i.redd.it/wy3ejxiydle51.jpg",
+      "sub": "r/NoahGetTheBoat",
+      "redditLink": "/r/NoahGetTheBoat/comments/i2c5on/columbian_puberty_hack/",
+      "title": "Columbian puberty hack"
+    },
+    {
+      "author": "swansang",
+      "link": "https://i.redd.it/t5b8f7y1dfd51.jpg",
+      "sub": "r/NotKenM",
+      "redditLink": "/r/NotKenM/comments/hyva5o/notkenm_on_racism/",
+      "title": "NotKenM on racism"
+    },
+    {
+      "author": "SameJude2",
+      "link": "https://i.redd.it/q3wfdnsrt0e51.jpg",
+      "sub": "r/yiffinhell",
+      "redditLink": "/r/yiffinhell/comments/i0p2vi/repost_green_mered_teacher/",
+      "title": "[Repost] Green: Me///Red: Teacher"
+    },
+    {
+      "author": "TheKow_",
+      "link": "https://i.redd.it/kt151dkc9oe51.jpg",
+      "sub": "r/notdisneyvacation",
+      "redditLink": "/r/notdisneyvacation/comments/i2lxe9/how_to_be_polite_on_the_phone/",
+      "title": "How to Be Polite on the Phone"
+    }
+  ],
+  "polls": []
 }

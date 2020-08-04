@@ -3,7 +3,7 @@
 export const RANDOM = {
 
     ffxiv: {
-        regexMatch: /ffxiv|final fantasy|FFXIV/,
+        regexMatch: /ffxiv|final fantasy|FFXIV|Stormblood|Shadowbringers|Heavensward/,
         responses: [
             "YALL NIKKAS WANT SOME GILL?"
         ]
@@ -18,7 +18,7 @@ export const RANDOM = {
     },
 
     birthday: {
-        regexMatch: /birthday|chris birth|hess birthday/,
+        regexMatch: /birthday|chris birth|hess birthday|bday/,
         responses: [
             "My birthday MONTH is August!",
             "August 8th! Best Day EVaHHH"
@@ -40,6 +40,7 @@ export const RANDOM = {
             "dude, I fucking love watermelon",
             "watermelon is so gross.",
             "fuck watermelon",
+            "Mmmhhmmmm Watermelonn",
             "watermelon is the best",
             "watermelons are for hookers and fat people"
         ]

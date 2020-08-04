@@ -27,6 +27,14 @@
     {
       "title": "Cabin in the Woods",
       "watched": false
+    },
+    {
+      "title": "Perfect Blue",
+      "watched": false
+    },
+    {
+      "title": "The Master",
+      "watched": false
     }
   ],
   "events": [],
@@ -104,7 +112,197 @@
       "sub": "r/notdisneyvacation",
       "redditLink": "/r/notdisneyvacation/comments/i2lxe9/how_to_be_polite_on_the_phone/",
       "title": "How to Be Polite on the Phone"
+    },
+    {
+      "author": "DoodleJake",
+      "link": "https://i.redd.it/3cfzhw91jne51.png",
+      "sub": "r/TIHI",
+      "redditLink": "/r/TIHI/comments/i2jffg/thanks_i_hate_luigis_human_teeth/",
+      "title": "Thanks, I hate Luigi's human teeth"
+    },
+    {
+      "author": "Chinesemermaidman",
+      "link": "https://i.redd.it/xpjn76tkjzb51.jpg",
+      "sub": "r/NotKenM",
+      "redditLink": "/r/NotKenM/comments/huin64/notkenm_on_buttfeed/",
+      "title": "NotKenM on Buttfeed"
+    },
+    {
+      "author": "atom_up",
+      "link": "https://i.redd.it/exjwydvmr8d51.jpg",
+      "sub": "r/NotKenM",
+      "redditLink": "/r/NotKenM/comments/hybiyw/colliflour/",
+      "title": "colliflour"
+    },
+    {
+      "author": "vaguelysauntering",
+      "link": "https://i.redd.it/bh4b7ny2ewb51.jpg",
+      "sub": "r/NotKenM",
+      "redditLink": "/r/NotKenM/comments/huag26/notkenm_on_birthplaces/",
+      "title": "NotKenM on birthplaces"
+    },
+    {
+      "author": "CipherInTheKnow",
+      "link": "https://i.redd.it/9g5ajnh5mte51.png",
+      "sub": "r/SuddenlyGay",
+      "redditLink": "/r/SuddenlyGay/comments/i312y1/my_online_spanish_lesson_just_featured_a/",
+      "title": "My online Spanish lesson just featured a pink-shirted daddy talking about his boyfriend"
+    },
+    {
+      "author": "QuesadillaJ",
+      "link": "https://i.redd.it/73iinvdl4we51.jpg",
+      "sub": "r/SuddenlyGay",
+      "redditLink": "/r/SuddenlyGay/comments/i3abdf/modification_of_the_previous_post/",
+      "title": "Modification of the previous post"
     }
   ],
-  "polls": []
+  "polls": [
+    {
+      "title": "asdf",
+      "author": "Faiyt",
+      "timestamp": 1596481521686,
+      "options": [
+        {
+          "text": "3",
+          "votes": 0
+        },
+        {
+          "text": "asdf",
+          "votes": 0
+        },
+        {
+          "text": "asdf",
+          "votes": 0
+        },
+        {
+          "text": "asdf",
+          "votes": 0
+        },
+        null
+      ]
+    },
+    {
+      "id": "739922865842815037",
+      "title": "what the heck",
+      "author": "Faiyt",
+      "timestamp": 1596481758218,
+      "totalOptions": "i am great",
+      "active": true,
+      "options": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "739922915947970663",
+      "title": "what the heck",
+      "author": "Faiyt",
+      "timestamp": 1596481770168,
+      "totalOptions": "3",
+      "active": true,
+      "options": [
+        {
+          "text": "a",
+          "votes": 0
+        },
+        {
+          "text": "b",
+          "votes": 0
+        },
+        {
+          "text": "c",
+          "votes": 0
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "id": "739923974204424377",
+      "title": "test",
+      "author": "Faiyt",
+      "timestamp": 1596482022414,
+      "totalOptions": "this",
+      "active": true,
+      "options": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "739924008010514492",
+      "title": "asdf",
+      "author": "Faiyt",
+      "timestamp": 1596482030402,
+      "totalOptions": "3",
+      "active": true,
+      "options": [
+        {
+          "text": "1",
+          "votes": 0
+        },
+        {
+          "text": "a",
+          "votes": 0
+        },
+        {
+          "text": "s",
+          "votes": 0
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "id": "739928852612251670",
+      "channel": {
+        "type": "text",
+        "deleted": false,
+        "id": "739325538040021093",
+        "name": "beep-boop",
+        "rawPosition": 11,
+        "parentID": "738158678024257566",
+        "permissionOverwrites": [],
+        "topic": null,
+        "nsfw": false,
+        "lastMessageID": "739928869582405663",
+        "rateLimitPerUser": 0,
+        "lastPinTimestamp": null,
+        "guild": "734441063355252757",
+        "messages": [
+          "739928852175913021",
+          "739928852612251670"
+        ],
+        "createdTimestamp": 1596339344273
+      },
+      "title": "asdf",
+      "author": "Faiyt",
+      "timestamp": 1596483185572,
+      "totalOptions": "3",
+      "active": true,
+      "deleted": false,
+      "options": [
+        {
+          "text": "asdf",
+          "votes": 0
+        },
+        {
+          "text": "asdf",
+          "votes": 0
+        },
+        {
+          "text": "asdf",
+          "votes": 0
+        },
+        null,
+        null
+      ]
+    }
+  ]
 }

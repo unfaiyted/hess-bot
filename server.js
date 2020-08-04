@@ -26,17 +26,12 @@ const randomKeys = Object.keys(RANDOM);
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-
-
-   const prev =  db.get('previousMemes').find({ link: "https://i.redd.it/ftrto3vvjvle51.jpg" }).value();
-
-   console.log(prev);
-
     // console all commands
     for (const key of commandKeys) {
         console.log(key);
         console.log("triggers: ",COMMANDS[key].triggers);
     }
+
 
 });
 
@@ -54,9 +49,29 @@ client.on('guildMemberAdd', member => {
 client.on('message', msg => {
     if (msg.author.bot) return;
 
-    if (msg.content === 'ping') {
-        msg.reply('pong');
+
+
+    msg.guild.members.fetch().then(members => {
+        //console.log(members);
+        console.log("woop");
+        for(const member of members) {
+            console.log(`
+            { 
+            username: \"${member[1].user.username}\",
+            responses: []
+            },
+            `)
+        }
+    });
+
+
+
+
+
+    if (msg.mentions.has(client.user)) {
+        msg.reply('<3');
     }
+
 
     for (const key of commandKeys) {
         if (COMMANDS[key].triggers.some(str => str.test(msg.content.toLowerCase()))) {
@@ -79,6 +94,15 @@ client.on('message', msg => {
 
         }
     }
+
+});
+
+
+client.on("messageReactionAdd", react => {
+   if (react.author.bot) return;
+
+
+   console.log(react.emoji.name)
 
 });
 

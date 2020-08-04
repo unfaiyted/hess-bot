@@ -7,11 +7,13 @@ import {CONFIRM, DENY} from "./responses/generic.js";
 import {MOVIES} from "./responses/movies.js";
 import {_FACE_} from "./constants/app.constants.js";
 import {MEMES} from "./responses/memes.js";
+import {POLLS} from "./responses/polls.js";
 
 
 export const COMMANDS = {
     ...MOVIES,
     ...MEMES,
+    ...POLLS,
   puns: {
       triggers: [
           /pun/,

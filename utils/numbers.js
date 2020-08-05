@@ -27,7 +27,7 @@ export const counting = (type,current) => {
             break;
         case 2: // by 10s
             console.log("count type: by tens");
-            return current+10;
+            return current+(10*current);
             break;
         case 3: // 100% random
             console.log("count type: all random");

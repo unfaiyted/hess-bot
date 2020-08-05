@@ -10,7 +10,7 @@ export const POLLS = {
 
             const STEPS = [
                 "Gimme dat poll title!",
-                "How many fuckin questions you want?",
+                "How many fukin questions you want?",
                 "Tell me your shitty first option",
                 "Tell me your awful second option",
                 "Tell me your boring third option",
@@ -49,7 +49,7 @@ export async function questionFlow(msg, data, STEPS, currentStep = 0, botMsg = n
     msg.channel.awaitMessages(m => m.author.id === msg.author.id,
         {max: 1, time: 30000}).then(async collected => {
             const step = currentStep + 1;
-            data.push(collected.first().content);
+
             collected.first().delete({timeout: 100});
 
             if(!data[3] || (2 + parseInt(data[3])) > step) {

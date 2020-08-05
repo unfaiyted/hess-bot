@@ -2,39 +2,83 @@
   "movies": [
     {
       "title": "A Serbian Film",
-      "watched": true
+      "watched": true,
+      "isNormie": false
     },
     {
       "title": "Eraserhead",
-      "watched": false
+      "watched": true,
+      "isNormie": false
     },
     {
       "title": "Solaris",
-      "watched": false
+      "watched": false,
+      "isNormie": false
     },
     {
       "title": "Society",
-      "watched": false
+      "watched": true,
+      "isNormie": false
     },
     {
       "title": "Palm Springs",
-      "watched": false
+      "watched": false,
+      "isNormie": true
     },
     {
       "title": "Happy Death Day",
-      "watched": false
+      "watched": false,
+      "isNormie": true
     },
     {
       "title": "Cabin in the Woods",
-      "watched": false
+      "watched": false,
+      "isNormie": false
     },
     {
       "title": "Perfect Blue",
-      "watched": false
+      "watched": false,
+      "isNormie": true
     },
     {
       "title": "The Master",
-      "watched": false
+      "watched": false,
+      "isNormie": false
+    },
+    {
+      "title": "The Dentist",
+      "watched": false,
+      "isNormie": false
+    },
+    {
+      "title": "Brain Dead",
+      "watched": false,
+      "isNormie": false
+    },
+    {
+      "title": "There Will Be Blood",
+      "watched": false,
+      "isNormie": false
+    },
+    {
+      "title": "Mr. Nobody",
+      "watched": false,
+      "isNormie": false
+    },
+    {
+      "title": "Dogtooth",
+      "watched": false,
+      "isNormie": false
+    },
+    {
+      "title": "Sky High",
+      "watched": false,
+      "isNormie": true
+    },
+    {
+      "title": "First Cow",
+      "watched": false,
+      "isNormie": false
     }
   ],
   "events": [],
@@ -154,6 +198,41 @@
       "sub": "r/SuddenlyGay",
       "redditLink": "/r/SuddenlyGay/comments/i3abdf/modification_of_the_previous_post/",
       "title": "Modification of the previous post"
+    },
+    {
+      "author": "purplegreenbean",
+      "link": "https://i.redd.it/pldwlgacdve51.jpg",
+      "sub": "r/HolUp",
+      "redditLink": "/r/HolUp/comments/i37uy5/uhhh/",
+      "title": "Uhhh..."
+    },
+    {
+      "author": "bobtheafk",
+      "link": "https://i.redd.it/g9xwz0u7lve51.jpg",
+      "sub": "r/notdisneyvacation",
+      "redditLink": "/r/notdisneyvacation/comments/i38lb7/how_to_sneak_around_your_house_at_night/",
+      "title": "How to sneak around your house at night"
+    },
+    {
+      "author": "ManiacPanda37",
+      "link": "https://i.redd.it/h7gbp0i9vue51.jpg",
+      "sub": "r/HolUp",
+      "redditLink": "/r/HolUp/comments/i36161/jfk/",
+      "title": "JFK"
+    },
+    {
+      "author": "Krispeykremestar",
+      "link": "https://i.redd.it/3vzg5vjtwpe51.jpg",
+      "sub": "r/suddenlysexoffender",
+      "redditLink": "/r/suddenlysexoffender/comments/i2qvv0/love_playing_this_with_my_daughter/",
+      "title": "Love playing this with my daughter"
+    },
+    {
+      "author": "DaniTheCookie",
+      "link": "https://i.redd.it/hkcjb0t1q2f51.jpg",
+      "sub": "r/notdisneyvacation",
+      "redditLink": "/r/notdisneyvacation/comments/i3uq49/how_to_be_random/",
+      "title": "How to be random"
     }
   ],
   "polls": [

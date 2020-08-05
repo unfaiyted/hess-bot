@@ -1,4 +1,5 @@
-import {randomItemFromArray, getPictureFromReddit} from "../utils.js";
+import {randomItemFromArray} from "../utils.js";
+import {getPictureFromReddit} from "../constants/api.js";
 import {CONFIRM} from "./generic.js";
 import {MessageEmbed} from "discord.js";
 

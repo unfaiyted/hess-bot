@@ -1,25 +1,33 @@
-
-
-
-const MENTIONS = [
+/**
+ * Create unique resposnes to being mentioned by Username
+ * @type {*[]}
+ */
+export const MENTIONS = [
     {
         username: "Tesmen",
-        responses: []
+        responses: [
+            "Who the fuck told you that you were people?",
+            "What the CheeseHead fuck do you want now?",
+            "Get yo sexy ass over here!  M M M M P F"
+        ]
     },
     {
         username: "Richard C",
-        responses: []
+        responses: [
+            "Richard!  What are we cooking!? :D",
+        ]
     },
     {
         username: "Faiyt",
         responses: [
-            "<3 You gave my life!"
+            "<3 You gave my life!",
+            "I live only to slake your bloodthirst, father"
         ]
     },
     {
         username: "row.rave",
         responses: [
-
+         "J'Alyssa Dos Santos De La Rocha Nina Pinta Santa Maria Mountain Dew Taco Town Gutierrez Picadillo Arroz Con Leche Manzanita Del Sol Por Favor Ayudame Pirque No Quiero Vivir Por Real Chinga Tu Pinche Madre Por Qué No Vas a Matame Pinche Baboso Cabrón De La Mierda Pendejo Whorenandez"
         ]
     },
     {

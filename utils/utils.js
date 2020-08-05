@@ -15,18 +15,16 @@ export const isURLImage = (url) => {
 };
 
 
-export  const getPictureFromReddit = (subReddit, index = 0) => {
-    const sub =  randomItemFromArray(MEMES_SUBS);
-    return fetch('https://www.reddit.com/r/' + sub + '.json')
-            .then(res => res.json())
-            .then(res => res.data.children)
-            .then(res => res.filter(post => isURLImage(post.data.url))
-                .map(post => ({
-                    author: post.data.author,
-                    link: post.data.url,
-                    sub: post.data.subreddit_name_prefixed,
-                    redditLink: post.data.permalink,
-                    title: post.data.title,
-            })))
-};
+export const getUserFromMention = (mention) => {
+    if (!mention) return;
 
+    if (mention.startsWith('<@') && mention.endsWith('>')) {
+        mention = mention.slice(2, -1);
+
+        if (mention.startsWith('!')) {
+            mention = mention.slice(1);
+        }
+
+        return client.users.cache.get(mention);
+    }
+}

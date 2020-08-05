@@ -6,7 +6,8 @@ import {TOKEN} from "./utils/constants/secret.js";
 import {COMMANDS, failChance} from "./utils/commands.js";
 import {RANDOM} from "./utils/responses/random.js";
 import {randomItemFromArray, isURLImage} from "./utils/utils.js";
-import {CONFIRM} from "./utils/responses/generic.js";
+import {CONFIRM} from "./utils/responses/generic.js"
+import {MENTIONS} from "./utils/responses/mentions.js";
 
 
 const adapter = new FileSync('db.json');
@@ -49,28 +50,42 @@ client.on('guildMemberAdd', member => {
 client.on('message', msg => {
     if (msg.author.bot) return;
 
+    // msg.guild.members.fetch().then(members => {
+    //     //console.log(members);
+    //     //console.log("woop");
+    //     for(const member of members) {
+    //         console.log(`
+    //         {
+    //         username: \"${member[1].user.username}\",
+    //         responses: []
+    //         },
+    //         `)
+    //     }
+    // });
 
-
-    msg.guild.members.fetch().then(members => {
-        //console.log(members);
-        console.log("woop");
-        for(const member of members) {
-            console.log(`
-            { 
-            username: \"${member[1].user.username}\",
-            responses: []
-            },
-            `)
-        }
-    });
-
-
-
+    console.log(msg.content);
 
 
     if (msg.mentions.has(client.user)) {
-        msg.reply('<3');
+       // console.log(msg.mentions);
+        let responded = false;
+        for(const mention of MENTIONS) {
+            //console.log(mention, msg.author.username,mention.username);
+            if(mention.username === msg.author.username) {
+
+                failChance(msg, (msg) => {
+                    msg.reply(randomItemFromArray(mention.responses));
+                }, true);
+
+                responded = true;
+            }
+        }
+
+        if(responded === false)  msg.reply('<3');
+
     }
+
+    //console.log(msg);
 
 
     for (const key of commandKeys) {

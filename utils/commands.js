@@ -45,10 +45,10 @@ export const COMMANDS = {
  * @param msg
  * @param func
  */
-export const failChance = (msg, func) => {
+export const failChance = (msg, func, noResposneOnFail = false) => {
 
     if (randomFailChance(.25)) {
-        msg.reply(randomItemFromArray(DENY))
+        if(noResposneOnFail === false) msg.reply(randomItemFromArray(DENY))
     } else {
         func(msg);
     }

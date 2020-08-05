@@ -1,8 +1,8 @@
-
-
+// Possible confirmation dialog
 export const CONFIRM = [
     "Awwwwwwww yissssssssss",
     "So good!",
+    "Awwww Shizzz",
     "Yissss",
     "Yussssssss",
     "Yusssssssssss",
@@ -18,6 +18,7 @@ export const CONFIRM = [
 ];
 
 
+// Failure dialog
 export const DENY = [
     "Na, I feel like I'm gonna get Z U C C D.",
     "No no no no noooo!",

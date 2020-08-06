@@ -4,6 +4,7 @@ import {counting, random} from "../numbers.js";
 import {MessageEmbed} from "discord.js";
 import {random as randomInt, randomFailChance} from "../numbers.js";
 import {searchForMovie,getMovieById} from "../constants/api.js";
+import {resultPerTrigger} from "../utils.js";
 
 export const MOVIES = {
     addMovie: {
@@ -11,25 +12,19 @@ export const MOVIES = {
             /add movie|add mov/,
             /add normie movie/
         ],
-        help: "",
+        help: "Adds movies to the list of movies, has two list types",
         func: (msg) => {
-
-            let content  = msg.content.split(" ");
-            content.splice(0,2).join(" ");
-
+            const strResults = resultPerTrigger(MOVIES.addMovie.triggers, msg.content);
             let isNormie = false;
+            if(strResults[1].hasMatch) isNormie = true;
 
-            const resultCrazy = msg.content.replace(MOVIES.addMovie.triggers[0], "").trim();
-            const resultNormie = msg.content.replace(MOVIES.addMovie.triggers[1], "").trim();
-
-            if(MOVIES.addMovie.triggers[1].test(msg.content.toLowerCase()) === true) isNormie = true;
-
+            const title = (isNormie) ? strResults[1].string : strResults[0].string;
 
             const result = db.get('movies')
-                .push({ title: (isNormie) ? resultNormie : resultCrazy, watched: false, isNormie })
+                .push({ title, watched: false, isNormie })
                 .write();
 
-            msg.reply(`${randomItemFromArray(CONFIRM)}, added ${content.join(" ")}`)
+            msg.reply(`${randomItemFromArray(CONFIRM)}, added ${(isNormie) ? "normie movie" : ""} ${title}`)
         }
     },
     getMovies: {
@@ -97,29 +92,18 @@ export const MOVIES = {
         help: "Command will mark a movie as watched",
         func: (msg) => {
 
-            const watched = MOVIES.toggleWatched.triggers[0];
-            const unWatched = MOVIES.toggleWatched.triggers[1];
+            const strResults = resultPerTrigger(MOVIES.toggleWatched.triggers, msg.content);
             let isWatched = false;
+            if(strResults[1].hasMatch) isWatched = true;
 
-            if(watched.test(msg.content.toLowerCase()) === true) isWatched = true;
-
-
-
-            const resultWatched = msg.content.replace(watched, "").trim();
-            const resultUnWatched = msg.content.replace(unWatched, "").trim();
-
-            console.log(resultUnWatched, resultWatched);
-
-            const cleanWatched = (isWatched) ? resultWatched : resultUnWatched;
-
-            console.log(isWatched, cleanWatched)
+            const watched = (isWatched) ? strResults[1].string : strResults[0].string;
 
             db.get('movies')
-              .find({ title: cleanWatched.trim() })
+              .find({title: watched.trim()})
               .assign({ watched: isWatched})
               .write();
 
-            msg.reply(`${isWatched ? "Awwwwwwww yissssssssss!! we" : "Na, we haven't" } saw ${cleanWatched}`)
+            msg.reply(`${isWatched ? randomItemFromArray(CONFIRM) + " we" : "Na, we haven't" } saw ${watched}`)
 
         }
     },
@@ -127,7 +111,7 @@ export const MOVIES = {
         triggers: [
             /get movie deets|get movie details|get info on/
         ],
-        help: "",
+        help: "Gets data about a given movie you are intersted in watching",
         func:  async (msg) => {
 
             const result = msg.content.replace(MOVIES.getMovieMetaData.triggers[0],"");
@@ -248,7 +232,7 @@ const movieEmbed = async (msg, movieId) => {
             {name: 'Runtime', value: movie.runtime, inline: true}
         )
         .setTimestamp()
-        .setFooter('HessBot the best Bot', client.user.displayAvatarURL());
+        .setFooter('HessBot the bess Bot', client.user.displayAvatarURL());
 
     msg.channel.send(movieEmbed);
 }

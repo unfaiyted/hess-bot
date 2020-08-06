@@ -13,6 +13,15 @@ export const MEMES = {
             getMemes(msg);
         }
     },
+    aww: {
+        triggers: [
+            /aww/
+        ],
+        func: async (msg) => {
+            msg.reply(randomItemFromArray(CONFIRM));
+            getMemes(msg, "aww");
+        }
+    },
 };
 
 
@@ -23,12 +32,12 @@ export const MEMES = {
  * @param maxRetry
  * @returns {Promise<void>}
  */
-export async function getMemes(msg, retry = 0, maxRetry = 5)  {
+export async function getMemes(msg, type = "meme", retry = 0, maxRetry = 5)  {
 
     console.log("trying to get memes");
 
     try {
-        const picture =  await getPictureFromReddit();
+        const picture =  await getPictureFromReddit(type);
 
         if(picture.length > 0) {
 

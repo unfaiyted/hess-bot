@@ -1,7 +1,8 @@
-import {MEMES_SUBS} from "./app.constants.js";
+import {MEMES_SUBS, AWW_SUBS} from "./app.constants.js";
 import{MOVIE_DB_API_V3} from "./secret.js";
 import fetch from "node-fetch";
 import {isURLImage, randomItemFromArray} from "../utils.js";
+
 
 
 export const API = {
@@ -10,8 +11,10 @@ export const API = {
 };
 
 
-export  const getPictureFromReddit = (subReddit, index = 0) => {
-    const sub =  randomItemFromArray(MEMES_SUBS);
+export  const getPictureFromReddit = (type, index = 0) => {
+
+
+    const sub =  randomItemFromArray((type === "meme") ? MEMES_SUBS: AWW_SUBS);
     return fetch('https://www.reddit.com/r/' + sub + '.json')
         .then(res => res.json())
         .then(res => res.data.children)

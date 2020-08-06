@@ -27,4 +27,26 @@ export const getUserFromMention = (mention) => {
 
         return client.users.cache.get(mention);
     }
-}
+};
+
+
+/**
+ * Cleans up the string for each trigger in a given set of triggers.
+ * @param triggers
+ * @param string
+ * @returns {Array}
+ */
+export const resultPerTrigger = (triggers, string) => {
+
+    let results = [];
+
+    for(const trigger of triggers) {
+        results.push({
+            string: string.replace(trigger,"").trim(),
+            hasMatch: (trigger.test(string)),
+        });
+    }
+
+    return results;
+
+};

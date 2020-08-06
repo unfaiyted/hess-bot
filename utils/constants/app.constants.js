@@ -13,14 +13,21 @@ export const MEMES_SUBS = [
     "Suddenlysexoffender",
     "Tihi",
     "Notkenm",
+    "trashy",
     "Notdisneyvacation",
     "Whoooosh",
+    "makemesuffer",
+    "makemesuffermore",
     "Shhhhhh"
 ];
 
 export const AWW_SUBS = [
     "cats",
     "aww",
+    "catpranks",
+    "catculations",
+    "chonkers",
+    "eyebleach",
     "kittypupperlove"
 ];
 

@@ -8,6 +8,7 @@ import {MOVIES} from "./responses/movies.js";
 import {_FACE_} from "./constants/app.constants.js";
 import {MEMES} from "./responses/memes.js";
 import {POLLS} from "./responses/polls.js";
+import {sendBirthdayReacts} from "./responses/birthday.js";
 
 
 export const COMMANDS = {
@@ -35,7 +36,17 @@ export const COMMANDS = {
             msg.channel.send(``, attachment);
             msg.reply("HAPPY AND FULFILLED")
         }
+    },
+    test: {
+        triggers: [
+            /testing/
+        ],
+        func: async (msg) => {
+            sendBirthdayReacts(msg)
+        }
     }
+
+
 };
 
 

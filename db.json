@@ -79,6 +79,16 @@
       "title": "First Cow",
       "watched": false,
       "isNormie": false
+    },
+    {
+      "title": "Creep",
+      "watched": false,
+      "isNormie": false
+    },
+    {
+      "title": "Creep 2",
+      "watched": false,
+      "isNormie": false
     }
   ],
   "events": [],
@@ -338,6 +348,27 @@
       "sub": "r/KittyPupperLove",
       "redditLink": "/r/KittyPupperLove/comments/hza74x/dreaming_together/",
       "title": "Dreaming together"
+    },
+    {
+      "author": "jsom25gaming",
+      "link": "https://i.imgur.com/x4eHpth.jpg",
+      "sub": "r/suddenlysexoffender",
+      "redditLink": "/r/suddenlysexoffender/comments/i3seai/what_in_the_world/",
+      "title": "What in the world"
+    },
+    {
+      "author": "VeronicaNichole",
+      "link": "https://i.redd.it/erwhp37s5ef51.jpg",
+      "sub": "r/trashy",
+      "redditLink": "/r/trashy/comments/i4snxd/here_we_go_again/",
+      "title": "Here we go again..."
+    },
+    {
+      "author": "spinn80",
+      "link": "https://i.redd.it/ourtbuwnw1f51.jpg",
+      "sub": "r/notdisneyvacation",
+      "redditLink": "/r/notdisneyvacation/comments/i3rvhx/how_to_tell_the_sex_of_an_angelfish/",
+      "title": "How to Tell the Sex of an Angelfish"
     }
   ],
   "polls": [

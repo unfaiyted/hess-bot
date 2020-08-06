@@ -50,3 +50,8 @@ export const resultPerTrigger = (triggers, string) => {
     return results;
 
 };
+
+
+export const getCustomEmoji = (name, msg) => {
+    return msg.guild.emojis.cache.find(emoji => emoji.name === 'hessPuns');
+};

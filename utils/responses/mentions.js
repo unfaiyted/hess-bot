@@ -2,6 +2,8 @@
  * Create unique resposnes to being mentioned by Username
  * @type {*[]}
  */
+
+//TODO: Refactor to use friends.js lookup
 export const MENTIONS = [
     {
         username: "Tesmen",

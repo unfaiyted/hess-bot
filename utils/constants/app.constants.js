@@ -1,7 +1,7 @@
 
 // Image Extensions
 export const VALID_IMG_EXT = ["png","gif","jpg","jpeg"];
-
+export const TAG_LINE = "HessBot the bess Bot";
 
 // Subs that hessBot likes
 export const MEMES_SUBS = [
@@ -28,13 +28,51 @@ export const AWW_SUBS = [
     "catculations",
     "chonkers",
     "eyebleach",
-    "kittypupperlove"
+    "kittypupperlove",
+    "AbsoluteUnits"
 ];
+
+
+export const EMOJIS = {
+    cake: "🎂",
+    spacers: [
+        "❤️","⭐","⬜","🟩","🟦","🟥","🟫"
+    ],
+    letters: {
+        a: "🇦",
+        b: "🇧",
+        c: "🇨",
+        d: "🇩",
+        e: "🇪",
+        f: "🇫",
+        g: "🇬",
+        h: "🇭",
+        i: "🇮",
+        j: "🇯",
+        k: "🇰",
+        l: "🇱",
+        m: "🇲",
+        n: "🇳",
+        o: "🇴",
+        p: "🇵",
+        q: "🇶",
+        r: "🇷",
+        s: "🇸",
+        t: "🇹",
+        u: "🇺",
+        v: "🇻",
+        w: "🇼",
+        x: "🇽",
+        y: "🇾",
+        z: "🇿",
+    }
+};
+
 
 // -____- face that can be called, formatted for discord
 export const _FACE_ = `-\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_-`;
 
 // Chance that the bot will just not respond with approriate info for a given command
 // hessBot is kinda random like that.
-export const FAIL_CHANCE = 0.25;
+export const FAIL_CHANCE = 0.16;
 

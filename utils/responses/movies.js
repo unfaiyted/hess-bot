@@ -9,8 +9,8 @@ import {resultPerTrigger} from "../utils.js";
 export const MOVIES = {
     addMovie: {
         triggers: [
-            /add movie|add mov/,
-            /add normie movie/
+            /add movie|add mov/i,
+            /add normie movie/i
         ],
         help: "Adds movies to the list of movies, has two list types",
         func: (msg) => {
@@ -24,12 +24,12 @@ export const MOVIES = {
                 .push({ title, watched: false, isNormie })
                 .write();
 
-            msg.reply(`${randomItemFromArray(CONFIRM)}, added ${(isNormie) ? "normie movie" : ""} ${title}`)
+            msg.reply(`${randomItemFromArray(CONFIRM)}, added ${(isNormie) ? "normie movie" : ""} ${title.trim()}`)
         }
     },
     getMovies: {
         triggers: [
-            /get movies|get movie list/
+            /get movies|get movie list/i
         ],
         help: "Command sends list of movies in DB",
         func: (msg) => {
@@ -164,8 +164,8 @@ export const MOVIES = {
     },
     pickRandomMovie: {
         triggers: [
-            /^<@([^>]+)> pick a movie/,
-            /^<@([^>]+)> pick movie/
+            /^<@([^>]+)> pick a movie/i,
+            /^<@([^>]+)> pick movie/i
       ],
         help: "Command will mark a movie as watched",
         func: async (msg) => {

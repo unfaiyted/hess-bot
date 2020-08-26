@@ -37,12 +37,10 @@ export const COMMANDS = {
             msg.reply("HAPPY AND FULFILLED")
         }
     },
-    test: {
-        triggers: [
-            /testing/
-        ],
-        func: async (msg) => {
-            sendBirthdayReacts(msg)
+    potassium: {
+            triggers: [ /k/i,],
+    func: async (msg) => {
+            if(msg.content.trim().length === 1)  msg.reply("Well, Potassium to you too")
         }
     }
 

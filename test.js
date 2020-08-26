@@ -25,5 +25,4 @@ for(const string of STRINGS) {
     for(const match of matches) {
         console.log(match)
     }
-
 }

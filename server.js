@@ -189,4 +189,7 @@ function createMessage(response, msg) {
 }
 
 
-client.login(TOKEN);
+TOKEN.then((result) => {
+    client.login(result);
+});
+

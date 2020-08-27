@@ -71,6 +71,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # JS files
-secret.js
 node_modules/
 

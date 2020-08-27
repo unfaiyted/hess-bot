@@ -64,7 +64,7 @@
   ],
   "placementConstraints": [],
   "memory": "512",
-  "taskRoleArn": null,
+  "taskRoleArn": "arn:aws:iam::785706154448:role/AmazonECSTaskServicesAccess",
   "compatibilities": [
     "EC2",
     "FARGATE"

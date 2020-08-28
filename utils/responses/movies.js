@@ -20,9 +20,8 @@ export const MOVIES = {
 
             const title = (isNormie) ? strResults[1].string : strResults[0].string;
 
-            const result = db.get('movies')
-                .push({ title, watched: false, isNormie })
-                .write();
+            const result = db.collection('movies')
+                .insert({ title, watched: false, isNormie });
 
             msg.reply(`${randomItemFromArray(CONFIRM)}, added ${(isNormie) ? "normie movie" : ""} ${title.trim()}`)
         }
@@ -32,22 +31,27 @@ export const MOVIES = {
             /get movies|get movie list/i
         ],
         help: "Command sends list of movies in DB",
-        func: (msg) => {
-            const movies = db.get('movies').value();
-            const type = random(0, 4);
+        func: async (msg) => {
+            const cursor = db.collection('movies').find({});
+            const movies = await cursor.toArray();
 
+            console.log(movies);
+            const type = random(0, 4);
 
             function mapMovie(movie, i) {
                 const title = (movie.watched) ? `~~${movie.title}~~` : movie.title;
                 return   "\n" +  counting(type, i) + ". " + title
             }
 
-
-            const crazyMovies =  movies.filter((mov) => !mov.isNormie)
+            let crazyMovies =  movies.filter((mov) => !mov.isNormie)
                 .map(mapMovie);
 
-            const normieMovies =  movies.filter((mov) => mov.isNormie)
+            let normieMovies =  movies.filter((mov) => mov.isNormie)
                 .map(mapMovie);
+
+            crazyMovies = (crazyMovies.length > 0) ? crazyMovies : "No movies";
+            normieMovies = (normieMovies.length > 0) ? normieMovies : "No movies";
+
 
             const embed = new MessageEmbed()
                 .setColor('#005f20')
@@ -66,50 +70,50 @@ export const MOVIES = {
     },
     deleteMovies: {
         triggers: [
-            /delete movie|del mov|delete that movie|delete the movie/
+            /delete movie|del mov|delete that movie|delete the movie/i
         ],
         help: "Command will remove a movie from our list",
         func: (msg) => {
 
-
             const result = msg.content.replace(MOVIES.deleteMovies.triggers[0],"");
             console.log(result);
 
-            db.get('movies')
-               .remove({ title: result.trim() })
-               .write();
-
-
-            msg.reply("Deleted that shizzzzz, I mean probably.")
-
+            db.collection('movies')
+               .deleteOne({ title: result.trim() }, (err,res) => {
+                   if (err) throw err;
+                   msg.reply("Deleted that shizzzzz, I mean probably.")
+               })
         }
     },
     toggleWatched: {
         triggers: [
-            /watched movie|We watched|we watched|movie watched|we have watched|was watched/,
-            /we didnt watch|was not watched|we havent watched|we haven't watched|we have not watched/
+            /watched movie|We watched|we watched|movie watched|we have watched|was watched|we saw/i,
+            /we didnt watch|was not watched|we havent watched|we haven't watched|we have not watched/i
         ],
         help: "Command will mark a movie as watched",
         func: (msg) => {
 
-            const strResults = resultPerTrigger(MOVIES.toggleWatched.triggers, msg.content);
+            const results = resultPerTrigger(MOVIES.toggleWatched.triggers, msg.content);
             let isWatched = false;
-            if(strResults[1].hasMatch) isWatched = true;
+            if(strResults[0].hasMatch) isWatched = true;
 
-            const watched = (isWatched) ? strResults[1].string : strResults[0].string;
 
-            db.get('movies')
-              .find({title: watched.trim()})
-              .assign({ watched: isWatched})
-              .write();
+            const movieWatched = (isWatched) ? results[1].string : results[0].string;
 
-            msg.reply(`${isWatched ? randomItemFromArray(CONFIRM) + " we" : "Na, we haven't" } saw ${watched}`)
-
+            db.collection('movies')
+              .updateOne({title: movieWatched.trim()}, { $set: {watched: isWatched} },
+                  (err, res) => {
+                      if (err)  {
+                          msg.reply("We done goofed....");
+                          console.log(err);
+                      }
+                      msg.reply(`${isWatched ? randomItemFromArray(CONFIRM) + " we saw" : "That's right, we haven't seen" } ${movieWatched}`)
+                  })
         }
     },
     getMovieMetaData: {
         triggers: [
-            /get movie deets|get movie details|get info on/
+            /get movie deets|get movie details|get info on/i
         ],
         help: "Gets data about a given movie you are intersted in watching",
         func:  async (msg) => {
@@ -169,7 +173,7 @@ export const MOVIES = {
       ],
         help: "Command will mark a movie as watched",
         func: async (msg) => {
-            const movies =  db.get('movies')
+            const movies =  db.collection('movies')
                 .filter({ watched: false }).value();
 
             const random = randomItemFromArray(movies);
@@ -185,12 +189,8 @@ export const MOVIES = {
                 if (i === randomStop) {
                     clearInterval(interval);
                     botMsg.edit(`${randomItemFromArray(CONFIRM)} its **${random.title}**`)
-
-
                 } else {
-
                     const fakeInteger = (randomFailChance(.15)) ? randomInt(-100, 20) : i;
-
                     botMsg.edit(`isssssss in...${fakeInteger}`);
                 }
 

@@ -11,12 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-cdk/aws-ssm": "^1.60.0",
     "aws-sdk": "^2.740.0",
-    "aws-ssm": "^0.3.11",
     "discord.js": "^12.2.0",
     "lowdb": "^1.0.0",
     "moment": "^2.27.0",
+    "mongodb": "^3.6.0",
     "node-fetch": "^2.6.0"
   }
 }

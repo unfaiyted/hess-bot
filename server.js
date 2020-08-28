@@ -1,6 +1,4 @@
 import Discord, {MessageAttachment} from "discord.js";
-import low from  'lowdb';
-import FileSync from 'lowdb/adapters/FileSync.js';
 import moment from 'moment';
 import {TOKEN} from "./utils/constants/secret.js";
 import {COMMANDS, failChance} from "./utils/commands.js";
@@ -10,22 +8,21 @@ import {randomItemFromArray, isURLImage} from "./utils/utils.js";
 import {CONFIRM} from "./utils/responses/generic.js"
 import {MENTIONS} from "./utils/responses/mentions.js";
 import {sendBirthdayReacts, bDayCompare} from "./utils/responses/birthday.js";
+import {connectToDatabase} from "./utils/database.js";
 
-
-const adapter = new FileSync('db.json');
-global.db = low(adapter);
-
-db.defaults({
-    movies: [],
-    events: [],
-    polls: [],
-    previousMemes: []
-}).write();
-
+// global.db = connectToDatabase();
 global.client = new Discord.Client();
+
 const commandKeys = Object.keys(COMMANDS);
 const randomKeys = Object.keys(RANDOM);
 const friendKeys =  Object.keys(FRIENDS);
+
+
+
+connectToDatabase().then((db) => {
+
+
+    global.db = db;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -188,8 +185,8 @@ function createMessage(response, msg) {
     }
 }
 
-
 TOKEN.then((result) => {
     client.login(result);
 });
 
+});

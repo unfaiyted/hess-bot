@@ -17,7 +17,7 @@ exports.MOVIES = {
         ],
         help: "Adds movies to the list of movies, has two list types",
         func: (msg) => {
-            const strResults = resultPerTrigger(MOVIES.addMovie.triggers, msg.content);
+            const strResults = resultPerTrigger(this.MOVIES.addMovie.triggers, msg.content);
             let isNormie = false;
             if(strResults[1].hasMatch) isNormie = true;
 
@@ -76,7 +76,7 @@ exports.MOVIES = {
         ],
         help: "Command will remove a movie from our list",
         func: (msg) => {
-            const result = msg.content.replace(MOVIES.deleteMovies.triggers[0],"");
+            const result = msg.content.replace(this.MOVIES.deleteMovies.triggers[0],"");
 
             db.collection('movies')
                .deleteOne({ title: result.trim() }, (err,res) => {
@@ -93,7 +93,7 @@ exports.MOVIES = {
         help: "Command will mark a movie as watched",
         func: (msg) => {
 
-            const results = resultPerTrigger(MOVIES.toggleWatched.triggers, msg.content);
+            const results = resultPerTrigger(this.MOVIES.toggleWatched.triggers, msg.content);
             let isWatched = false;
             if(results[0].hasMatch) isWatched = true;
 
@@ -118,7 +118,7 @@ exports.MOVIES = {
         help: "Gets data about a given movie you are intersted in watching",
         func:  async (msg) => {
 
-            const result = msg.content.replace(MOVIES.getMovieMetaData.triggers[0],"");
+            const result = msg.content.replace(this.MOVIES.getMovieMetaData.triggers[0],"");
 
             try {
                 const matches = await searchForMovie(result);

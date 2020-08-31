@@ -4,6 +4,7 @@ const { _FACE_ } = require('../utils/constants/app.constants.js');
 const { MOVIES } = require('./movies.js');
 const { MEMES } = require('./memes.js');
 const { POLLS } = require('./polls.js');
+const pjson = require('../../package.json');
 
 const COMMANDS = {
   ...MOVIES,
@@ -34,6 +35,12 @@ const COMMANDS = {
     triggers: [/k/i],
     func: async (msg) => {
       if (msg.content.trim().length === 1) msg.reply('Well, Potassium to you too');
+    },
+  },
+  version: {
+    triggers: [/-version/i],
+    func: (msg) => {
+      msg.reply(`I'm v${pjson.version}, what you think you're better than me?`);
     },
   },
 

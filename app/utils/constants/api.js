@@ -1,17 +1,19 @@
-import {MEMES_SUBS, AWW_SUBS} from "./app.constants.js";
-import{MOVIE_DB_API_V3} from "./secret.js";
-import fetch from "node-fetch";
-import {isURLImage, randomItemFromArray} from "../utils.js";
+const MEMES_SUBS = require("./app.constants.js").MEMES_SUBS;
+const AWW_SUBS = require("./app.constants.js").AWW_SUBS;
+const MOVIE_DB_API_V3 = require("./secret.js").MOVIE_DB_API_V3;
+const fetch = require("node-fetch");
+const isURLImage = require("../utils.js").isURLImage;
+const randomItemFromArray = require("../utils.js").randomItemFromArray;
 
 
 
-export const API = {
+exports.API = {
     MOVIEDB: "https://api.themoviedb.org/3/",
     REDDIT: "'https://www.reddit.com",
 };
 
 
-export  const getPictureFromReddit = (type, index = 0) => {
+exports.getPictureFromReddit = (type, index = 0) => {
 
 
     const sub =  randomItemFromArray((type === "meme") ? MEMES_SUBS: AWW_SUBS);
@@ -32,13 +34,11 @@ export  const getPictureFromReddit = (type, index = 0) => {
 
 //https://api.themoviedb.org/3/search/movie?api_key=xsdfasdfasdf&language=en-US&query=Movie&page=1&include_adult=true&year=2002
 
-export const searchForMovie = (search) => {
+exports.searchForMovie = (search) => {
 
     const { searchString, yearString} = parseSearch(search);
 
     const fetchString = `${API.MOVIEDB}search/movie?api_key=${MOVIE_DB_API_V3}&language=en-US${searchString}&include_adult=true${yearString}`;
-
-    console.log(fetchString);
 
     return fetch(fetchString)
         .then(res => res.json())
@@ -55,8 +55,7 @@ export const searchForMovie = (search) => {
 };
 
 
-export const getMovieById = (id) => {
-    console.log("movie id",id)
+exports.getMovieById = (id) => {
     const fetchString = `${API.MOVIEDB}movie/${id}?api_key=${MOVIE_DB_API_V3}&language=en-US`;
     console.log(fetchString);
     return fetch(fetchString)
@@ -68,8 +67,6 @@ const parseSearch = (string) => {
 
     const regEx = /\d{4}\b$/;
     const year = string.match(regEx);
-
-    console.log(year)
 
     const search = string.replace(regEx, "").trim();
 

@@ -1,8 +1,8 @@
-import {randomItemFromArray, resultPerTrigger} from "../utils";
-import {CONFIRM} from "./generic";
+const randomItemFromArray = require("../utils/utils").randomItemFromArray;
+const resultPerTrigger = require("../utils/utils").resultPerTrigger;
+const CONFIRM = require("../responses/generic").CONFIRM;
 
-
-export const EVENTS = {
+exports.EVENTS = {
     addEvent: {
 
         //Name

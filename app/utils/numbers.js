@@ -5,7 +5,7 @@
  * @param failChance, 0.1 = 10%  1.0 = 100%, will always fail, 0 to disable
  * @returns {boolean}
  */
-export const randomFailChance =  (failChance) => {
+exports.randomFailChance =  (failChance = .15) => {
     return !((Math.random())>=failChance);
 };
 
@@ -16,7 +16,7 @@ export const randomFailChance =  (failChance) => {
  * @param max
  * @returns {number}
  */
-export const random = (min = 0, max = 100) => {
+exports.random = (min = 0, max = 100) => {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 };
 
@@ -29,29 +29,29 @@ export const random = (min = 0, max = 100) => {
  * @param current
  * @returns {number|*}
  */
-export const counting = (type,current) => {
+exports.counting = (type,current) => {
 
     switch (type) {
         case 0: // normal
-            console.log("count type: normal");
+            log.info("count type: normal");
             return current+1;
             break;
         case 1: // at zero
-            console.log("count type: at zero");
+            log.info("count type: at zero");
             return current;
             break;
         case 2: // by 10s
-            console.log("count type: by tens");
+            log.info("count type: by tens");
             return current+(10*current);
             break;
         case 3: // 100% random
-            console.log("count type: all random");
-            return current + random();
+            log.info("count type: all random");
+            return current + exports.random();
             break;
         case 4: // almost normal
-            console.log("count type: almost normal");
+            log.info("count type: almost normal");
             if (current <= 1) return current++;
-            return (randomFailChance(.15)) ? current + random() : current++;
+            return (this.randomFailChance(.15)) ? current + exports.random() : current++;
             break;
     }
 

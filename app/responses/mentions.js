@@ -1,10 +1,8 @@
-/**
- * Create unique resposnes to being mentioned by Username
- * @type {*[]}
- */
+const {randomItemFromArray}  = require("../utils/utils.js");
+const {failChance} = require("../utils/message.js");
 
 //TODO: Refactor to use friends.js lookup
-export const MENTIONS = [
+exports.MENTIONS = [
     {
         username: "Tesmen",
         responses: [
@@ -22,7 +20,7 @@ export const MENTIONS = [
     {
         username: "Faiyt",
         responses: [
-            "<3 You gave my life!",
+            "<3 You gave me life!",
             "I live only to slake your bloodthirst, father"
         ]
     },
@@ -84,3 +82,20 @@ export const MENTIONS = [
     },
 
 ];
+
+exports.sendMentionResponse = (msg) => {
+    if (msg.mentions.has(client.user)) {
+        let responded = false;
+        for (const mention of this.MENTIONS) {
+            //console.log(mention, msg.author.username,mention.username);
+            if (mention.username === msg.author.username) {
+                failChance(msg, (msg) => {
+                    msg.reply(randomItemFromArray(mention.responses));
+                }, true);
+                responded = true;
+            }
+        }
+        // In case user is not found
+        if (responded === false) msg.reply('<3');
+    }
+}

@@ -1,6 +1,7 @@
-
-
-export const RANDOM = {
+const {randomItemFromArray}  = require("../utils/utils.js");
+const { createMessage } = require("../utils/message.js");
+// Semi-ish responses to different input
+exports.RANDOM = {
 
     ffxiv: {
         regexMatch: /ffxiv|final fantasy|FFXIV|Stormblood|Shadowbringers|Heavensward/,
@@ -165,3 +166,23 @@ export const RANDOM = {
     }
 
 };
+
+
+
+exports.sendRandomMessage = (msg) => {
+    const randomKeys = Object.keys(this.RANDOM);
+    for (const key of randomKeys) {
+        if (this.RANDOM[key].regexMatch.test(msg.content.toLowerCase())) {
+
+            const response = randomItemFromArray(this.RANDOM[key].responses);
+
+            if (Array.isArray(response)) {
+                for (const res of response) {
+                    createMessage(res, msg);
+                }
+            } else {
+                createMessage(response, msg)
+            }
+        }
+    }
+}

@@ -1,6 +1,5 @@
 
-
-export default conspiracy = [
+module.exports = conspiracy = [
     {
         regexMatch: "",
         response: ""

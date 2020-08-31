@@ -1,6 +1,6 @@
-import {MessageEmbed} from "discord.js";
+const MessageEmbed = require("discord.js").MessageEmbed;
 
-export const POLLS = {
+exports.POLLS = {
     createPoll: {
         triggers: [
             /add poll|add new poll/
@@ -38,7 +38,7 @@ export const POLLS = {
 };
 
 
-export async function questionFlow(msg, data, STEPS, currentStep = 0, botMsg = null) {
+module.exports = async function questionFlow(msg, data, STEPS, currentStep = 0, botMsg = null) {
 
     if(botMsg === null) {
          botMsg = await msg.channel.send(syncPollDetails(data, STEPS[currentStep]));
@@ -105,7 +105,7 @@ export async function questionFlow(msg, data, STEPS, currentStep = 0, botMsg = n
             }
 
     }).catch((e) => {
-        console.log(e);
+        log.error(e);
       botMsg.edit('Dude you\'re slow as hell, or I crashed hard. Laters');
     });
 }

@@ -1,5 +1,5 @@
 // Possible confirmation dialog
-export const CONFIRM = [
+exports.CONFIRM = [
     "Awwwwwwww yissssssssss",
     "So good!",
     "Awwww Shizzz",
@@ -19,7 +19,7 @@ export const CONFIRM = [
 
 
 // Failure dialog
-export const DENY = [
+exports.DENY = [
     "Na, I feel like I'm gonna get Z U C C D.",
     "No no no no noooo!",
     "Ahhhhhhhhhhhhhhhhh whyyyyyyyyyyyyyy",

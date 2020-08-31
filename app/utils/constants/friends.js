@@ -1,4 +1,4 @@
-export const FRIENDS = {
+exports.FRIENDS = {
 adam:{
     username: "Tesmen",
     birthday: "04/08/1992"

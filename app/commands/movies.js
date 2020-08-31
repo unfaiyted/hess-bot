@@ -1,12 +1,15 @@
-import {randomItemFromArray} from "../utils.js";
-import {CONFIRM} from "./generic.js";
-import {counting, random} from "../numbers.js";
-import {MessageEmbed} from "discord.js";
-import {random as randomInt, randomFailChance} from "../numbers.js";
-import {searchForMovie,getMovieById} from "../constants/api.js";
-import {resultPerTrigger} from "../utils.js";
+const randomItemFromArray = require("../utils/utils.js").randomItemFromArray;
+const CONFIRM = require("../responses/generic.js").CONFIRM;
+const counting = require("../utils/numbers.js").counting;
+const random = require("../utils/numbers.js").random;
+const MessageEmbed = require("discord.js").MessageEmbed;
+const randomInt = require("../utils/numbers.js").random;
+const randomFailChance = require("../utils/numbers.js").randomFailChance;
+const searchForMovie = require("../utils/constants/api.js").searchForMovie;
+const getMovieById = require("../utils/constants/api.js").getMovieById;
+const resultPerTrigger = require("../utils/utils.js").resultPerTrigger;
 
-export const MOVIES = {
+exports.MOVIES = {
     addMovie: {
         triggers: [
             /add movie|add mov/i,
@@ -35,7 +38,7 @@ export const MOVIES = {
             const cursor = db.collection('movies').find({});
             const movies = await cursor.toArray();
 
-            console.log(movies);
+
             const type = random(0, 4);
 
             function mapMovie(movie, i) {
@@ -52,7 +55,6 @@ export const MOVIES = {
             crazyMovies = (crazyMovies.length > 0) ? crazyMovies : "No movies";
             normieMovies = (normieMovies.length > 0) ? normieMovies : "No movies";
 
-
             const embed = new MessageEmbed()
                 .setColor('#005f20')
                 .setTitle('Movies List')
@@ -62,7 +64,7 @@ export const MOVIES = {
                           {name: "Normie Movies", value: `${normieMovies}`, inline: true}
                 )
                 .setTimestamp()
-                .setFooter('HessBot the best Bot',  client.user.displayAvatarURL());
+                .setFooter('HessBot the bess Bot',  client.user.displayAvatarURL());
 
             msg.channel.send(embed);
 
@@ -74,9 +76,7 @@ export const MOVIES = {
         ],
         help: "Command will remove a movie from our list",
         func: (msg) => {
-
             const result = msg.content.replace(MOVIES.deleteMovies.triggers[0],"");
-            console.log(result);
 
             db.collection('movies')
                .deleteOne({ title: result.trim() }, (err,res) => {
@@ -95,17 +95,17 @@ export const MOVIES = {
 
             const results = resultPerTrigger(MOVIES.toggleWatched.triggers, msg.content);
             let isWatched = false;
-            if(strResults[0].hasMatch) isWatched = true;
+            if(results[0].hasMatch) isWatched = true;
 
 
-            const movieWatched = (isWatched) ? results[1].string : results[0].string;
+            const movieWatched = (isWatched) ? results[0].string : results[1].string;
 
             db.collection('movies')
               .updateOne({title: movieWatched.trim()}, { $set: {watched: isWatched} },
                   (err, res) => {
                       if (err)  {
                           msg.reply("We done goofed....");
-                          console.log(err);
+                          log.error(err);
                       }
                       msg.reply(`${isWatched ? randomItemFromArray(CONFIRM) + " we saw" : "That's right, we haven't seen" } ${movieWatched}`)
                   })
@@ -138,7 +138,7 @@ export const MOVIES = {
                             {name: 'Next', value: `Reply with number to get full movie deetz`},
                         )
                         .setTimestamp()
-                        .setFooter('HessBot the best Bot', client.user.displayAvatarURL());
+                        .setFooter('HessBot the bess Bot', client.user.displayAvatarURL());
 
                     msg.channel.send(embed);
 
@@ -160,7 +160,7 @@ export const MOVIES = {
 
             }
             catch(e) {
-             console.log(e);
+                log.error(e);
                 msg.reply("How about...crashing")
             }
 
@@ -207,7 +207,6 @@ const createList = (movies) => {
   let list = "";
   let i = 1;
   for(const movie of movies) {
-      console.log(movie);
       list += `${i}. ${movie.title} - ${movie.release_date}\n`
   }
   return list;
@@ -218,7 +217,6 @@ const movieEmbed = async (msg, movieId) => {
 
     const movie = await getMovieById(movieId);
 
-    console.log(movie)
     const movieEmbed = new MessageEmbed()
         .setColor('#005f20')
         .setTitle(`${movie.title} - ${movie.release_date.substr(0,4)}`)

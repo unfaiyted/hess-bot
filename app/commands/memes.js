@@ -1,9 +1,9 @@
-import {randomItemFromArray} from "../utils.js";
-import {getPictureFromReddit} from "../constants/api.js";
-import {CONFIRM} from "./generic.js";
-import {MessageEmbed} from "discord.js";
+const randomItemFromArray = require("../utils/utils.js").randomItemFromArray;
+const getPictureFromReddit = require("../utils/constants/api.js").getPictureFromReddit;
+const CONFIRM = require("../responses/generic.js").CONFIRM;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
-export const MEMES = {
+exports.MEMES = {
     memes: {
         triggers: [
             /meme/
@@ -32,9 +32,7 @@ export const MEMES = {
  * @param maxRetry
  * @returns {Promise<void>}
  */
-export async function getMemes(msg, type = "meme", retry = 0, maxRetry = 5)  {
-
-    console.log("trying to get memes");
+module.exports = async function getMemes(msg, type = "meme", retry = 0, maxRetry = 5)  {
 
     try {
         const picture =  await getPictureFromReddit(type);
@@ -42,8 +40,6 @@ export async function getMemes(msg, type = "meme", retry = 0, maxRetry = 5)  {
         if(picture.length > 0) {
 
             const chosen = randomItemFromArray(picture);
-
-            console.log("chosen",chosen);
 
             const prev = db.get('previousMemes').find({ link: chosen.link }).value();
 
@@ -77,7 +73,7 @@ export async function getMemes(msg, type = "meme", retry = 0, maxRetry = 5)  {
         }
 
     } catch (e) {
-        console.log(e)
+        log.error(e)
         if(retry < maxRetry) {
             getMemes(msg,retry+1);
         } else {

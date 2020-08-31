@@ -1,11 +1,10 @@
-import fetch from "node-fetch"
-import {MEMES_SUBS, VALID_IMG_EXT} from "./constants/app.constants.js";
+const VALID_IMG_EXT = require("./constants/app.constants.js").VALID_IMG_EXT;
 
-export const randomItemFromArray = (array) => {
+exports.randomItemFromArray = (array) => {
  return array[Math.floor(Math.random()*(array.length))]
 };
 
-export const isURLImage = (url) => {
+exports.isURLImage = (url) => {
 
     const urlSplit = url.split("/");
     const fileName = urlSplit[urlSplit.length-1];
@@ -14,8 +13,7 @@ export const isURLImage = (url) => {
     return VALID_IMG_EXT.some(ext => ext === extension[1]);
 };
 
-
-export const getUserFromMention = (mention) => {
+exports.getUserFromMention = (mention) => {
     if (!mention) return;
 
     if (mention.startsWith('<@') && mention.endsWith('>')) {
@@ -36,7 +34,7 @@ export const getUserFromMention = (mention) => {
  * @param string
  * @returns {Array}
  */
-export const resultPerTrigger = (triggers, string) => {
+exports.resultPerTrigger = (triggers, string) => {
 
     let results = [];
 
@@ -52,9 +50,8 @@ export const resultPerTrigger = (triggers, string) => {
 };
 
 
-export const getCustomEmoji = (name, msg) => {
+exports.getCustomEmoji = (name, msg) => {
     return msg.guild.emojis.cache.find(emoji => emoji.name === 'hessPuns');
 };
-
 
 

@@ -10,7 +10,7 @@
 
 # Generated files
 .idea/**/contentModel.xml
-
+.idea/**
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
@@ -73,3 +73,5 @@ fabric.properties
 # JS files
 node_modules/
 
+#scratchpaper
+./test.js

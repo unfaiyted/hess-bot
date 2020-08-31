@@ -45,6 +45,7 @@ const COMMANDS = {
   },
 
 };
+
 const commandKeys = Object.keys(COMMANDS);
 
 module.exports = {

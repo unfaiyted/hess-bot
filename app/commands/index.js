@@ -4,12 +4,14 @@ const { _FACE_ } = require('../utils/constants/app.constants.js');
 const { MOVIES } = require('./movies.js');
 const { MEMES } = require('./memes.js');
 const { POLLS } = require('./polls.js');
+const { MUSIC } = require('./music.js');
 const pjson = require('../../package.json');
 
 const COMMANDS = {
   ...MOVIES,
   ...MEMES,
   ...POLLS,
+  ...MUSIC,
   puns: {
     triggers: [
       /pun/,

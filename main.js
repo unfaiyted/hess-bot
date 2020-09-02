@@ -1,6 +1,5 @@
 // App Logger
 const { Logger } = require('tslog');
-
 global.log = new Logger({
   name: 'MainLogger',
   overwriteConsole: true,

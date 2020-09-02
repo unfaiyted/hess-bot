@@ -18,7 +18,6 @@
     "moment": "^2.27.0",
     "mongodb": "^3.6.0",
     "node-fetch": "^2.6.0",
-    "node-opus": "^0.3.3",
     "sodium": "^3.0.2",
     "tslog": "^2.7.1",
     "ytdl-core": "^3.2.2"

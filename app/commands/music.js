@@ -1,6 +1,7 @@
 const ytdl = require('ytdl-core');
 
 global.VoiceConnections = new Map();
+global.SongDispatcher = new Map();
 
 const start = async (msg) => {
   const args = msg.content.split(' ');
@@ -51,35 +52,42 @@ const start = async (msg) => {
   connectToVoice(msg, collection);
 };
 
-function play(guild, song, collection) {
-  const playlist = collection.findOne({ guild: guild.id });
+async function play(guild, song, number = 0) {
+  const playlist = await db.collection('playlists').findOne({ guild: guild.id });
   if (!song) {
     log.info('No songs to play, leaving voice.');
-    guild.channels.get(playlist.voiceChannel).leave();
+    guild.channels.cache.get(playlist.voiceChannel).leave();
+    VoiceConnections.delete(guild.id);
     return;
   }
-
   const connection = VoiceConnections.get(guild.id);
 
   log.info('Playing song', song);
 
   const dispatcher = connection
-    .play(ytdl(song.url))
-    .on('finish', () => {
+    .play(ytdl(song.url, { filter: 'audioonly' }))
+    .on('finish', async () => {
       log.info('Changing song');
-      const pl = collection.findOne({ guild: guild.id });
-      play(guild, pl.songs[0], collection);
+      const collection = db.collection('playlists');
+      const pl = await collection.findOne({ guild: guild.id });
+
+      number += 1;
+      log.info(pl.songs[number], number);
+
+      play(guild, pl.songs[number], number);
     })
     .on('error', (error) => log.error(error));
 
   log.info('setting voice volume');
-  dispatcher.setVolumeLogarithmic(playlist.volume / 5);
+  dispatcher.setVolumeLogarithmic(5 / 5);
+
+  SongDispatcher.set(guild.id, dispatcher);
 
   const channel = client.channels.cache.get(playlist.textChannel);
 
-  log.info('txt channel', channel);
+  // log.info('txt channel', channel);
 
-  // .send(`Start playing: **${song.title}**`);
+  // .send(`🎶 Start playing: **${song.title}**`);
 }
 
 const connectToVoice = async (msg, collection) => {
@@ -94,35 +102,44 @@ const connectToVoice = async (msg, collection) => {
       connection = await msg.member.voice.channel.join();
       VoiceConnections.set(msg.guild.id, connection);
       log.info('Connecting to voice channel');
-      play(msg.guild, playlist.songs[0], collection);
+      play(msg.guild, playlist.songs[0]);
     } catch (err) {
       log.error('Unable to connect to voice', err);
       return msg.channel.send('Error? Voice..play idk', err);
     }
   } else {
     log.info('Existing voice connection found.');
-    play(msg.guild, playlist.songs[0], collection);
+    play(msg.guild, playlist.songs[0]);
   }
 };
 
 function skip(msg) {
+  log.info('User is skipping this song.');
   if (!msg.member.voice.channel) {
     return msg.channel.send(
-      'You have to be in a voice channel to stop the music!',
+      'You have to be in a voice channel to skip songs.',
     );
   }
-  // if (!serverQueue) return msg.channel.send('There is no song that I could skip!');
-  // serverQueue.connection.dispatcher.end();
+
+  const dispatcher = SongDispatcher.get(msg.guild.id);
+  if (!dispatcher) return msg.channel.send('There is no song that I could skip!');
+  dispatcher.end();
 }
 
-function stop(msg) {
+async function stop(msg) {
+  log.info('User is stopping the music.');
   if (!msg.member.voice.channel) {
     return msg.channel.send(
       'You have to be in a voice channel to stop the music!',
     );
   }
-  // serverQueue.songs = [];
-  // serverQueue.connection.dispatcher.end();
+
+  const playlist = await db.collection('playlists').findOne({ guild: msg.guild.id });
+  const dispatcher = SongDispatcher.get(msg.guild.id);
+  if (dispatcher) dispatcher.end();
+  // Bot needs to leave the voice channel
+  msg.guild.channels.cache.get(playlist.voiceChannel).leave();
+  VoiceConnections.delete(msg.guild.id);
 }
 
 exports.MUSIC = {
@@ -161,6 +178,16 @@ exports.MUSIC = {
     help: 'Adds a song to the playlist',
     func: (msg) => {},
   },
-  // shuffle: {
-  // },
+  clearPlaylist: {
+    triggers: [
+      /clear playlist|clear music/i,
+    ],
+    help: 'Deelte all songs from the playlist',
+    func: async (msg) => {
+      const collection = db.collection('playlists');
+      await collection.updateOne({ guild: msg.guild.id }, { $set: { songs: [] } });
+
+      msg.reply('Deleted');
+    },
+  },
 };

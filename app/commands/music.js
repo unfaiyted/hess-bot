@@ -1,55 +1,97 @@
 const ytdl = require('ytdl-core');
+const { DefaultEmbed } = require('../utils/embed.js');
+const { sendMsgToChannel } = require('../utils/utils');
+const { CONFIRM } = require('../responses/generic');
+const { randomItemFromArray } = require('../utils/utils');
+
+
 
 global.VoiceConnections = new Map();
 global.SongDispatcher = new Map();
 
-const start = async (msg) => {
-  const args = msg.content.split(' ');
-  const collection = db.collection('playlists');
+// ideas: random bad sax songs
+// sax man
+
+
+
+const validateChannelAndPermissions = (msg) => {
   const voiceChannel = msg.member.voice.channel;
 
   if (!voiceChannel) {
-    return msg.channel.send(
+    msg.channel.send(
       'You need to be in a voice channel to play music!',
     );
+    return false;
   }
 
   const permissions = voiceChannel.permissionsFor(msg.client.user);
   if (!permissions.has('CONNECT') || !permissions.has('SPEAK')) {
-    return msg.channel.send(
+    msg.channel.send(
       'I need the permissions to join and speak in your voice channel!',
     );
+    return false;
   }
 
-  const songInfo = await ytdl.getInfo(args[1]);
-  const song = {
-    title: songInfo.videoDetails.title,
-    url: songInfo.videoDetails.video_url,
+  return true;
+};
+
+const createNewPlaylist = async (msg) => {
+  const collection = db.collection('playlists');
+  log.info('Playlist not found, will create one');
+  const voiceChannel = msg.member.voice.channel;
+
+  const playlistConstruct = {
+    guild: msg.guild.id,
+    textChannel: msg.channel.id,
+    voiceChannel: voiceChannel.id,
+    connection: null,
+    songs: [],
+    volume: 5,
+    playing: true,
   };
+
+  await collection.insertOne(playlistConstruct);
+};
+
+const start = async (msg) => {
+  const args = msg.content.split(' ');
+  const collection = db.collection('playlists');
+  let songNumber = 0;
+  let isArgNumber = false;
+
+  if (!validateChannelAndPermissions(msg)) return;
+
+  if (Number.isInteger(parseInt(args[1], 10))) isArgNumber = true;
 
   const playlist = await collection.findOne({ guild: msg.guild.id });
 
-  if (!playlist) {
-    log.info('Playlist not found, will create one');
-
-    const playlistConstruct = {
-      guild: msg.guild.id,
-      textChannel: msg.channel.id,
-      voiceChannel: voiceChannel.id,
-      connection: null,
-      songs: [],
-      volume: 5,
-      playing: true,
+  // If URL sent,
+  if (!isArgNumber) {
+    const songInfo = await ytdl.getInfo(args[1]);
+    const song = {
+      title: songInfo.videoDetails.title,
+      url: songInfo.videoDetails.video_url,
     };
 
-    await collection.insertOne(playlistConstruct);
-  } else {
+    if (!playlist) await createNewPlaylist(msg);
+
     msg.channel.send(`${song.title} has been added to the playlist!`);
+    await collection.updateOne({ guild: msg.guild.id }, { $push: { songs: song } });
+
+    const currentList = await collection.findOne({ guild: msg.guild.id }).songs;
+
+    songNumber = currentList.songs.length - 1;
+  } else {
+    const number = parseInt(args[1], 10);
+
+    if (number > playlist.songs.length || number < 1) {
+      msg.channel.send('You picked a song outside of the playlist range');
+      return;
+    }
+    songNumber = number - 1;
   }
 
-  await collection.updateOne({ guild: msg.guild.id }, { $push: { songs: song } });
-
-  connectToVoice(msg, collection);
+  connectToVoice(msg, collection, songNumber);
 };
 
 async function play(guild, song, number = 0) {
@@ -85,12 +127,10 @@ async function play(guild, song, number = 0) {
 
   const channel = client.channels.cache.get(playlist.textChannel);
 
-  // log.info('txt channel', channel);
-
-  // .send(`🎶 Start playing: **${song.title}**`);
+  channel.send(`🎶  ${randomItemFromArray(CONFIRM)} started playing: **${song.title}**`);
 }
 
-const connectToVoice = async (msg, collection) => {
+const connectToVoice = async (msg, collection, songNumber = 0) => {
   log.info('Checking for voice connection');
 
   let connection = VoiceConnections.get(msg.guild.id);
@@ -102,14 +142,14 @@ const connectToVoice = async (msg, collection) => {
       connection = await msg.member.voice.channel.join();
       VoiceConnections.set(msg.guild.id, connection);
       log.info('Connecting to voice channel');
-      play(msg.guild, playlist.songs[0]);
+      play(msg.guild, playlist.songs[songNumber]);
     } catch (err) {
       log.error('Unable to connect to voice', err);
       return msg.channel.send('Error? Voice..play idk', err);
     }
   } else {
     log.info('Existing voice connection found.');
-    play(msg.guild, playlist.songs[0]);
+    play(msg.guild, playlist.songs[songNumber]);
   }
 };
 
@@ -145,7 +185,7 @@ async function stop(msg) {
 exports.MUSIC = {
   play: {
     triggers: [
-      /play|play song/i,
+      /play |play song /i,
     ],
     help: 'Tells the bot to start playing music',
     func: start,
@@ -178,11 +218,31 @@ exports.MUSIC = {
     help: 'Adds a song to the playlist',
     func: (msg) => {},
   },
+  getPlaylist: {
+    triggers: [
+      /get playlist|get music list/i,
+    ],
+    help: 'Get all songs from the playlist',
+    func: async (msg) => {
+      log.info('Getting playlist now');
+      const collection = db.collection('playlists');
+
+      const { songs } = await collection.findOne({ guild: msg.guild.id });
+
+      // sendMessageToChannel();
+
+      const songList = songs.map((song, i) => `${song.title}`);
+
+      log.info(`Playlist has ${songs.length} songs`);
+
+      sendMsgToChannel(msg, DefaultEmbed({ list: songList, listTitle: 'Playlist' }));
+    },
+  },
   clearPlaylist: {
     triggers: [
       /clear playlist|clear music/i,
     ],
-    help: 'Deelte all songs from the playlist',
+    help: 'Remove all songs from the playlist',
     func: async (msg) => {
       const collection = db.collection('playlists');
       await collection.updateOne({ guild: msg.guild.id }, { $set: { songs: [] } });

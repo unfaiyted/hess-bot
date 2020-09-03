@@ -77,7 +77,7 @@ exports.MOVIES = {
       const result = msg.content.replace(this.MOVIES.deleteMovies.triggers[0], '');
 
       db.collection('movies')
-        .deleteOne({ title: result.trim() }, (err, res) => {
+        .deleteOne({ title: result.trim() }, (err) => {
           if (err) throw err;
           msg.reply('Deleted that shizzzzz, I mean probably.');
         });
@@ -98,7 +98,7 @@ exports.MOVIES = {
 
       db.collection('movies')
         .updateOne({ title: movieWatched.trim() }, { $set: { watched: isWatched } },
-          (err, res) => {
+          (err) => {
             if (err) {
               msg.reply('We done goofed....');
               log.error(err);
@@ -138,7 +138,7 @@ exports.MOVIES = {
 
           msg.channel.awaitMessages((m) => m.author.id === msg.author.id,
             { max: 1, time: 30000 }).then(async (collected) => {
-            const id = parseInt(collected.first().content);
+            const id = parseInt(collected.first().content, 10);
             movieId = matches[id - 1].id;
             movieEmbed(msg, movieId);
           });

@@ -6,7 +6,6 @@ const { CONFIRM } = require('./responses/generic.js');
 const connectToDatabase = require('./utils/database.js');
 
 // App Status reporting.
-// TODO: Update this to database recording
 // Will need status and last time retrieved
 const STATUSES = {
   launching: 'launching',
@@ -57,8 +56,9 @@ class App {
   listen() {
     log.warn('Loading Bot listeners');
 
-    client.on('ready', () => {
+    client.on('ready', async () => {
       log.info(`Logged in as ${client.user.tag}!`);
+      await client.user.setActivity('a Saxophone 🎷');
       Commands.log();
     });
 

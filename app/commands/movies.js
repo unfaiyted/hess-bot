@@ -1,12 +1,9 @@
 const { MessageEmbed } = require('discord.js');
 const { randomItemFromArray } = require('../utils/utils.js');
 const { CONFIRM } = require('../responses/generic.js');
-const { counting } = require('../utils/numbers.js');
-const { random } = require('../utils/numbers.js');
-const randomInt = require('../utils/numbers.js').random;
+const { counting, random: randomInt } = require('../utils/numbers.js');
 const { randomFailChance } = require('../utils/numbers.js');
-const { searchForMovie } = require('../utils/constants/api.js');
-const { getMovieById } = require('../utils/constants/api.js');
+const { searchForMovie, getMovieById } = require('../utils/constants/api.js');
 const { resultPerTrigger } = require('../utils/utils.js');
 
 exports.MOVIES = {
@@ -38,7 +35,7 @@ exports.MOVIES = {
       const cursor = db.collection('movies').find({});
       const movies = await cursor.toArray();
 
-      const type = random(0, 4);
+      const type = randomInt(0, 4);
 
       function mapMovie(movie, i) {
         const title = (movie.watched) ? `~~${movie.title}~~` : movie.title;

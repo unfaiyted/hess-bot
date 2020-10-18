@@ -4,15 +4,11 @@ const { sendMsgToChannel } = require('../utils/utils');
 const { CONFIRM } = require('../responses/generic');
 const { randomItemFromArray } = require('../utils/utils');
 
-
-
 global.VoiceConnections = new Map();
 global.SongDispatcher = new Map();
 
-// ideas: random bad sax songs
+// TODO: ideas: random bad sax songs
 // sax man
-
-
 
 const validateChannelAndPermissions = (msg) => {
   const voiceChannel = msg.member.voice.channel;
@@ -177,6 +173,7 @@ async function stop(msg) {
   const playlist = await db.collection('playlists').findOne({ guild: msg.guild.id });
   const dispatcher = SongDispatcher.get(msg.guild.id);
   if (dispatcher) dispatcher.end();
+
   // Bot needs to leave the voice channel
   msg.guild.channels.cache.get(playlist.voiceChannel).leave();
   VoiceConnections.delete(msg.guild.id);
@@ -231,7 +228,7 @@ exports.MUSIC = {
 
       // sendMessageToChannel();
 
-      const songList = songs.map((song, i) => `${song.title}`);
+      const songList = songs.map((song) => `${song.title}`);
 
       log.info(`Playlist has ${songs.length} songs`);
 
